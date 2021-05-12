@@ -49,36 +49,36 @@ DELETE_DELAY = 8
 DURATION_AUTOPLAY_MIN = 10
 DURATION_PLAY_HOUR = 3
 
-USERBOT_HELP = f"""{emoji.LABEL}  **Common Commands**:
-__available to group members of current voice chat__
-__starts with / (slash) or ! (exclamation mark)__
+USERBOT_HELP = f"""{emoji.LABEL}  **Perintah Umum**:
+__tersedia untuk anggota grup obrolan suara saat ini__
+__dimulai dengan/(slash) atau! (tanda seru)__
 
-\u2022 **/play**  reply with an audio to play/queue it, or show playlist
-\u2022 **/current**  show current playing time of current track
-\u2022 **/repo**  show git repository of the userbot
-\u2022 `!help`  show help for commands
+\u2022 **/play**  balas dengan audio untuk memutar/mengantri, atau melihat daftar music
+\u2022 **/current**  menunjukkan waktu putar trek saat ini
+\u2022 **/repo**  tunjukkan repositori git dari userbot King
+\u2022 `!help`  tunjukkan bantuan untuk help
 
 
-{emoji.LABEL}  **Admin Commands**:
-__available to userbot account itself and its contacts__
-__starts with ! (exclamation mark)__
+{emoji.LABEL}  **Perintah Admin**:
+__tersedia untuk akun userbot itu sendiri dan kontaknya__
+__dimulai dengan ! (tanda seru)__
 
-\u2022 `!skip` [n] ...  skip current or n where n >= 2
-\u2022 `!join`  join voice chat of current group
-\u2022 `!leave`  leave current voice chat
-\u2022 `!vc`  check which VC is joined
-\u2022 `!stop`  stop playing
-\u2022 `!replay`  play from the beginning
-\u2022 `!clean`  remove unused RAW PCM files
-\u2022 `!pause` pause playing
-\u2022 `!resume` resume playing
-\u2022 `!mute`  mute the VC userbot
-\u2022 `!unmute`  unmute the VC userbot
+\u2022 `!skip` [n] ...  lewati saat ini atau n di mana n >= 2
+\u2022 `!join`  bergabung dengan obrolan suara grup saat ini 
+\u2022 `!leave`  keluar dari obrolan suara saat ini
+\u2022 `!vc`  periksa VC mana yang bergabung
+\u2022 `!stop`  stop memulai
+\u2022 `!replay`  mainkan dari awal
+\u2022 `!clean`  hapus file RAW PCM yang tidak digunakan
+\u2022 `!pause` jeda pemulaian 
+\u2022 `!resume` lanjutkan memulai
+\u2022 `!mute`  mematikan suara bot pengguna VC
+\u2022 `!unmute`  aktifkan robot pengguna VC
 """
 
-USERBOT_REPO = f"""{emoji.ROBOT} **Telegram Voice Chat UserBot**
+USERBOT_REPO = f"""{emoji.ROBOT} **Telegram Voice Chat King**
 
-- Repository: [GitHub](https://github.com/callsmusic/tgvc-userbot)
+- Repo Github: [Repo](https://github.com/apisuserbot/tgvc-King)
 - License: AGPL-3.0-or-later"""
 
 
@@ -114,9 +114,9 @@ async def play_track(client, m: Message):
     if m.audio:
         if m.audio.duration > (DURATION_AUTOPLAY_MIN * 60):
             reply = await m.reply_text(
-                f"{emoji.ROBOT} audio which duration longer than "
-                f"{str(DURATION_AUTOPLAY_MIN)} min won't be automatically "
-                "added to playlist"
+                f"{emoji.ROBOT} audio yang durasinya lebih lama dari "
+                f"{str(DURATION_AUTOPLAY_MIN)} min tidak akan otomatis"
+                "ditambahkan ke playlist"
             )
             await _delay_delete_messages((reply,), DELETE_DELAY)
             return
@@ -125,8 +125,8 @@ async def play_track(client, m: Message):
         m_audio = m.reply_to_message
         if m_audio.audio.duration > (DURATION_PLAY_HOUR * 60 * 60):
             reply = await m.reply_text(
-                f"{emoji.ROBOT} audio which duration longer than "
-                f"{str(DURATION_PLAY_HOUR)} hours won't be added to playlist"
+                f"{emoji.ROBOT} audio yang durasinya lebih lama dari "
+                f"{str(DURATION_PLAY_HOUR)} jam tidak akan ditambahkan ke playlist"
             )
             await _delay_delete_messages((reply,), DELETE_DELAY)
             return
@@ -137,14 +137,14 @@ async def play_track(client, m: Message):
     # check already added
     if playlist and playlist[-1].audio.file_unique_id \
             == m_audio.audio.file_unique_id:
-        reply = await m.reply_text(f"{emoji.ROBOT} already added")
+        reply = await m.reply_text(f"{emoji.ROBOT} Telah ditambahkan")
         await _delay_delete_messages((reply, m), DELETE_DELAY)
         return
     # add to playlist
     playlist.append(m_audio)
     if len(playlist) == 1:
         m_status = await m.reply_text(
-            f"{emoji.INBOX_TRAY} downloading and transcoding..."
+            f"{emoji.INBOX_TRAY} mengunduh dan transcoding..."
         )
         await mp.download_audio(playlist[0])
         group_call.input_filename = os.path.join(
@@ -154,7 +154,7 @@ async def play_track(client, m: Message):
         )
         await mp.update_start_time()
         await m_status.delete()
-        print(f"- START PLAYING: {playlist[0].audio.title}")
+        print(f"- Memulai: {playlist[0].audio.title}")
     await mp.send_playlist()
     for track in playlist[:2]:
         await mp.download_audio(track)
@@ -169,7 +169,7 @@ async def show_current_playing_time(_, m: Message):
     start_time = mp.start_time
     playlist = mp.playlist
     if not start_time:
-        reply = await m.reply_text(f"{emoji.PLAY_BUTTON} unknown")
+        reply = await m.reply_text(f"{emoji.PLAY_BUTTON} Tidak dikenal")
         await _delay_delete_messages((reply, m), DELETE_DELAY)
         return
     utcnow = datetime.utcnow().replace(microsecond=0)
@@ -217,7 +217,7 @@ async def skip_track(_, m: Message):
             reply = await m.reply_text("\n".join(text))
             await mp.send_playlist()
         except (ValueError, TypeError):
-            reply = await m.reply_text(f"{emoji.NO_ENTRY} invalid input",
+            reply = await m.reply_text(f"{emoji.NO_ENTRY} masukan tidak valid",
                                        disable_web_page_preview=True)
         await _delay_delete_messages((reply, m), DELETE_DELAY)
 
@@ -229,7 +229,7 @@ async def join_group_call(client, m: Message):
     group_call = mp.group_call
     group_call.client = client
     if group_call.is_connected:
-        await m.reply_text(f"{emoji.ROBOT} already joined a voice chat")
+        await m.reply_text(f"{emoji.ROBOT} sudah bergabung dengan obrolan suara")
         return
     await group_call.start(m.chat.id)
     await m.delete()
@@ -256,12 +256,12 @@ async def list_voice_chat(client, m: Message):
         chat_id = int("-100" + str(group_call.full_chat.id))
         chat = await client.get_chat(chat_id)
         reply = await m.reply_text(
-            f"{emoji.MUSICAL_NOTES} **currently in the voice chat**:\n"
+            f"{emoji.MUSICAL_NOTES} **saat ini di obrolan suara**:\n"
             f"- **{chat.title}**"
         )
     else:
         reply = await m.reply_text(emoji.NO_ENTRY
-                                   + "didn't join any voice chat yet")
+                                   + "belum bergabung dengan obrolan suara apa pun")
     await _delay_delete_messages((reply, m), DELETE_DELAY)
 
 
@@ -272,7 +272,7 @@ async def list_voice_chat(client, m: Message):
 async def stop_playing(_, m: Message):
     group_call = mp.group_call
     group_call.stop_playout()
-    reply = await m.reply_text(f"{emoji.STOP_BUTTON} stopped playing")
+    reply = await m.reply_text(f"{emoji.STOP_BUTTON} Memberhentikan lagu")
     await mp.update_start_time(reset=True)
     mp.playlist.clear()
     await _delay_delete_messages((reply, m), DELETE_DELAY)
@@ -290,7 +290,7 @@ async def restart_playing(_, m: Message):
     await mp.update_start_time()
     reply = await m.reply_text(
         f"{emoji.COUNTERCLOCKWISE_ARROWS_BUTTON}  "
-        "playing from the beginning..."
+        "Memulai dari awal..."
     )
     await _delay_delete_messages((reply, m), DELETE_DELAY)
 
@@ -302,7 +302,7 @@ async def restart_playing(_, m: Message):
 async def pause_playing(_, m: Message):
     mp.group_call.pause_playout()
     await mp.update_start_time(reset=True)
-    reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} paused",
+    reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} jeda",
                                quote=False)
     mp.msg['pause'] = reply
     await m.delete()
@@ -314,7 +314,7 @@ async def pause_playing(_, m: Message):
                    & filters.regex("^!resume"))
 async def resume_playing(_, m: Message):
     mp.group_call.resume_playout()
-    reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} resumed",
+    reply = await m.reply_text(f"{emoji.PLAY_OR_PAUSE_BUTTON} lanjutkan",
                                quote=False)
     if mp.msg.get('pause') is not None:
         await mp.msg['pause'].delete()
@@ -339,7 +339,7 @@ async def clean_raw_pcm(client, m: Message):
             if fn.endswith(".raw"):
                 count += 1
                 os.remove(os.path.join(download_dir, fn))
-    reply = await m.reply_text(f"{emoji.WASTEBASKET} cleaned {count} files")
+    reply = await m.reply_text(f"{emoji.WASTEBASKET} dibersihkan {count} file")
     await _delay_delete_messages((reply, m), DELETE_DELAY)
 
 
@@ -350,7 +350,7 @@ async def clean_raw_pcm(client, m: Message):
 async def mute(_, m: Message):
     group_call = mp.group_call
     group_call.set_is_mute(True)
-    reply = await m.reply_text(f"{emoji.MUTED_SPEAKER} muted")
+    reply = await m.reply_text(f"{emoji.MUTED_SPEAKER} bisu")
     await _delay_delete_messages((reply, m), DELETE_DELAY)
 
 
@@ -361,7 +361,7 @@ async def mute(_, m: Message):
 async def unmute(_, m: Message):
     group_call = mp.group_call
     group_call.set_is_mute(False)
-    reply = await m.reply_text(f"{emoji.SPEAKER_MEDIUM_VOLUME} unmuted")
+    reply = await m.reply_text(f"{emoji.SPEAKER_MEDIUM_VOLUME} tidak dibisukan")
     await _delay_delete_messages((reply, m), DELETE_DELAY)
 
 
