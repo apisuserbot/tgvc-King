@@ -88,7 +88,7 @@ async def generate_sysinfo(workdir):
                    & ~filters.via_bot
                    & filters.regex("^!sysinfo$"))
 async def get_sysinfo(client, m):
-    response = "**System Information**:\n"
+    response = "**Informasi Sistem**:\n"
     m_reply = await m.reply_text(f"{response}`...`")
     response += await generate_sysinfo(client.workdir)
     await m_reply.edit_text(response)
