@@ -1,39 +1,26 @@
-# Telegram Voice Chat UserBot
+# Telegram Voice Chat King
 
-A Telegram UserBot to Play Audio in Voice Chats.
+UserBot Telegram untuk Memutar Audio dalam Obrolan Suara.
 
-This is also the source code of the userbot which is being used for playing
-DJ/Live Sets music in [VC DJ/Live Sets](https://t.me/VCSets) group.
+Ini juga merupakan kode sumber dari userbot yang digunakan untuk bermain
+DJ/Live Mengatur musik [VC DJ/Live Di](https://t.me/King-Userbot) grup Support.
 
-Made with [tgcalls](https://github.com/MarshalX/tgcalls)
-and [Pyrogram Smart Plugin](https://docs.pyrogram.org/topics/smart-plugins)
+Dianjurkan untuk digunakan [tgcalls](https://github.com/MarshalX/tgcalls)
+Anda [Pyrogram Smart Plugin](https://docs.pyrogram.org/topics/smart-plugins)
 
-It's recommended to use [tgmusicbot](https://github.com/callsmusic/tgmusicbot)
-along with this userbot.
+Dianjurkan untuk digunakan [tgmusicuserbot](https://github.com/apisuserbot/tgvc-King)
+bersama dengan userbot ini.
 
-## Deploy to Heroku
+## Deploy ke Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/apisuserbot/tgvc-King/tree/dev)
 
-- Generate Pyrogram session string by
-  running [generate-pyrogram-session-string.py](generate-pyrogram-session-string.py)
-  by yourself or
-  through [Replit](https://replit.com/@dashezup/generate-pyrogram-session-string)
-- Enable the worker after deploy the project to Heroku
-- send `!ping`, `!uptime`, or `!sysinfo` from userbot account itself or its
-  contacts to check if the userbot is running
-- Send `!join` to a voice chat enabled group chat from userbot account itself
-  or its contacts
-- Reply to an audio with `/play` to start playing it in the voice chat, every
-  member of the group can use the `!play` and other common commands now,
-  check `!help` for more commands
 
-Check [smart-plugins](https://github.com/callsmusic/tgvc-userbot/tree/smart-plugins)
-branch If you want to use `radio` or `recorder` plugin.
-
+Cek [smart-plugins](https://github.com/callsmusic/tgvc-userbot/tree/smart-plugins)
+branch Jika Anda ingin menggunakan plugin `radio` atau` recorder`.
 ## Introduction
 
-**Features**
+**Fitur**
 
 - Playlist, queue
 - Loop one track when there is only one track in the playlist
@@ -41,45 +28,44 @@ branch If you want to use `radio` or `recorder` plugin.
   ensure smooth playing
 - Automatically pin the current playing track
 - Show current playing position of the audio
+- Daftar putar, antrian
+- Ulangi satu trek jika hanya ada satu trek di daftar putar
+- Secara otomatis mengunduh audio untuk dua trek pertama dalam daftar putar ke
+  memastikan permainan yang lancar
+- Secara otomatis menyematkan trek yang sedang diputar
+- Tampilkan posisi pemutaran audio saat ini
 
-**How to Use**
+**Cara Penggunaan**
 
-You can't play and listen in the same voice chat at the same time, it's
-recommended to run the userbot with your alt account and control the userbot
-with your main account by adding your main account as a contact of the alt
-account.
+Anda tidak dapat bermain dan mendengarkan dalam obrolan suara yang sama pada saat yang sama
+disarankan untuk menjalankan userbot dengan akun alt Anda dan mengontrol userbot tersebut
+dengan akun utama Anda dengan menambahkan akun utama Anda sebagai kontak alt
+Akun. 
 
-1. Start the userbot, try `!ping`, `!uptime` or `!sysinfo` command to check if
-   the bot was running.
-2. send `!join` to a voice chat enabled group chat from userbot account itself
-   or its contacts, be sure to make the userbot account as group admin and give
-   it at least the following permissions:
-    - Delete messages
-    - Manage voice chats (optional)
-3. reply to an audio with `/play` to start playing it in the voice chat, every
-   member of the group can use common commands such like `/play`, `/current`
-   and `!help` now.
-4. check `!help` for more commands
+1. Jalankan userbot, coba perintah `! Ping`,`! Uptime` atau `! Sysinfo` untuk memeriksa apakah
+   bot itu sedang berjalan.
+2. kirim `! Join` ke obrolan grup yang mendukung obrolan suara dari akun userbot itu sendiri
+   atau kontaknya, pastikan untuk menjadikan akun userbot sebagai admin grup dan berikan
+   itu setidaknya izin berikut:
+    - Hapus pesan
+    - Kelola obrolan suara (opsional)
+3. balas audio dengan `/ play` untuk mulai memutarnya di obrolan suara, setiap
+   anggota grup dapat menggunakan perintah umum seperti `/ play`,` / current`
+   dan `! help` sekarang.
+4. periksa `! Help` untuk perintah lainnya
 
-## Requirements
+## Telegram Music
+![Logo Project](https://telegra.ph/file/0defa48ac7a3c240cc5a0.jpg)
 
-- Python 3.6 or higher
-- One or two Telegram accounts, better to have one for the userbot and another
-  one as a contact of the userbot account to control it
--
-A [Telegram API key](https://docs.pyrogram.org/intro/quickstart#enjoy-the-api)
-and a Telegram account
-- Choose plugins you need, install dependencies which listed above and
-  run `pip install -U -r requirements.txt` to install python package
-  dependencies as well
-- [FFmpeg](https://www.ffmpeg.org/)
+• Music dan tgvc adalah seputar bot dan userbot yang di gunakan untuk menghibur warga telegram dengan pesan bersuara!
+   🐱 Channel Update : @MusicPr0jEctTElegram
 
 ## Run
 
-Choose one of the two methods and run the userbot with
-`python userbot.py`, stop with <kbd>CTRL+c</kbd>. The following example assume
-that you were going to use `vc.player` and `ping` plugin, replace
-`api_id`, `api_hash` to your own value.
+Pilih salah satu dari dua metode dan jalankan userbot dengan
+`python userbot.py`, hentikan dengan <kbd> CTRL + c </kbd>. Contoh berikut mengasumsikan
+bahwa Anda akan menggunakan plugin `vc.player` dan` ping`, ganti
+`api_id`,` api_hash` ke nilai Anda sendiri.
 
 ### Method 1: use config.ini
 
@@ -118,10 +104,10 @@ plugins = dict(
 
 app = Client("tgvc", api_id, api_hash, plugins=plugins)
 app.start()
-print('>>> USERBOT STARTED')
+print('>>> KING STARTED')
 idle()
 app.stop()
-print('\n>>> USERBOT STOPPED')
+print('\n>>> KING STOPPED')
 ```
 
 # License
