@@ -65,6 +65,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ```
 
 ## Kredit 
-             TERIMAKASIH KEPADA 
+   TERIMAKASIH KEPADA 🙏
   
 *   [dashezup](https://github.com/dashezup) - tgvc-userbot
