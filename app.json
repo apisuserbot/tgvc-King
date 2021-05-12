@@ -1,7 +1,7 @@
 {
-  "name": "Telegram Voice Chat Music Player UserBot (tgvc-userbot)",
-  "description": "Telegram UserBot to Play Audio in Telegram Voice Chats",
-  "repository": "https://github.com/callsmusic/tgvc-userbot",
+  "name": "UserBot Pengguna Pemutar Musik Obrolan Suara Telegram (tgvc-King)",
+  "description": "Telegram UserBot untuk Memutar Audio dalam Obrolan Suara Telegram",
+  "repository": "https://github.com/apisuserbot/tgvc-King",
   "logo": "https://i.imgur.com/I1jB4i5.jpg",
   "keywords": [
     "tgvc-userbot",
@@ -17,15 +17,15 @@
   ],
   "env": {
     "API_ID": {
-            "description": "api_id part of your Telegram API Key from my.telegram.org/apps",
+            "description": "Ambil api_id di web my.telegram.org/apps",
             "required": true
     },
     "API_HASH": {
-            "description": "api_hash part of your Telegram API Key from my.telegram.org/apps",
+            "description": "Ambil api_hash di web my.telegram.org/apps",
             "required": true
     },
     "SESSION_NAME": {
-            "description": "Session string, read the README to learn how to export it with Pyrogram",
+            "description": "Ambil String Session Pyrogram Caranya Gabung @KingUserbotSupport Lalu Ketik #string",
             "required": true
     }
   },
