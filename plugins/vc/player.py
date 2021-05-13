@@ -15,23 +15,23 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-Play and Control Audio playing in Telegram Voice Chat
+Putar dan Kontrol Audio yang diputar di Telegram Voice Chat
 
 Dependencies:
 - ffmpeg
 
-Required group admin permissions:
-- Delete messages
-- Manage voice chats (optional)
+Izin admin grup yang diperlukan:
+- Menghapus Pesan
+- Kelola obrolan suara (pilihan)
 
-How to use:
-- Start the userbot
-- send !join to a voice chat enabled group chat
-  from userbot account itself or its contacts
-- reply to an audio with /play to start playing
-  it in the voice chat, every member of the group
-  can use the !play command now
-- check !help for more commands
+Cara Penggunaan:
+- Mulai bot pengguna
+- kirim! bergabung dengan obrolan grup yang mendukung obrolan suara
+  dari akun userbot itu sendiri atau kontaknya
+- balas audio dengan / putar untuk mulai memutar
+  itu di obrolan suara, setiap anggota grup
+  dapat menggunakan perintah! play sekarang
+- periksa! bantuan untuk lebih banyak perintah
 """
 
 import asyncio
@@ -78,8 +78,8 @@ __dimulai dengan ! (tanda seru)__
 
 USERBOT_REPO = f"""{emoji.ROBOT} **Telegram Voice Chat King**
 
-- Repo Github: [Repo](https://github.com/apisuserbot/tgvc-King)
-- License: AGPL-3.0-or-later"""
+- ⚡️𝙍𝙀𝙋𝙊 𝙂𝙄𝙏𝙃𝙐𝘽⚡️: [Repo](https://github.com/apisuserbot/tgvc-King)
+- ⚡️𝙇𝙄𝘾𝙀𝙉𝙎𝙀⚡️: AGPL-3.0-or-later"""
 
 
 # - Pyrogram filters
@@ -154,7 +154,7 @@ async def play_track(client, m: Message):
         )
         await mp.update_start_time()
         await m_status.delete()
-        print(f"- Memulai: {playlist[0].audio.title}")
+        print(f"- Memulai Lagu: {playlist[0].audio.title}")
     await mp.send_playlist()
     for track in playlist[:2]:
         await mp.download_audio(track)
