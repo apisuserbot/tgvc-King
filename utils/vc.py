@@ -43,7 +43,7 @@ class MusicPlayer(object):
     async def send_playlist(self):
         playlist = self.playlist
         if not playlist:
-            pl = f"{emoji.NO_ENTRY} empty playlist"
+            pl = f"{emoji.NO_ENTRY} Daftar lagu kosong"
         else:
             if len(playlist) == 1:
                 pl = f"{emoji.REPEAT_SINGLE_BUTTON} **Playlist**:\n"
@@ -74,7 +74,7 @@ class MusicPlayer(object):
         await self.update_start_time()
         # remove old track from playlist
         old_track = playlist.pop(0)
-        print(f"- START PLAYING: {playlist[0].audio.title}")
+        print(f"- Memulai Lagu: {playlist[0].audio.title}")
         await self.send_playlist()
         os.remove(os.path.join(
             download_dir,
@@ -123,9 +123,9 @@ mp = MusicPlayer()
 async def network_status_changed_handler(gc: GroupCall, is_connected: bool):
     if is_connected:
         mp.chat_id = int("-100" + str(gc.full_chat.id))
-        await mp.send_text(f"{emoji.CHECK_MARK_BUTTON} joined the voice chat")
+        await mp.send_text(f"{emoji.CHECK_MARK_BUTTON} Bergabung ke Voice Chat!")
     else:
-        await mp.send_text(f"{emoji.CROSS_MARK_BUTTON} left the voice chat")
+        await mp.send_text(f"{emoji.CROSS_MARK_BUTTON} Keluar dari Voice Chat!")
         mp.chat_id = None
 
 
